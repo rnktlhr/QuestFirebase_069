@@ -1,6 +1,7 @@
 package com.example.firebase.viewmodel
 
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -20,6 +21,18 @@ object PenyediaViewModel {
         }
         initializer {
             EntryViewModel(
+                aplikasiDataSiswa().container.repositorySiswa
+            )
+        }
+        initializer {
+            DetailViewModel(
+                createSavedStateHandle(),
+                aplikasiDataSiswa().container.repositorySiswa
+            )
+        }
+        initializer {
+            EditViewModel(
+                createSavedStateHandle(),
                 aplikasiDataSiswa().container.repositorySiswa
             )
         }
