@@ -99,7 +99,7 @@ fun HomeBody(
             is StatusUiSiswa.Loading -> LoadingScreen()
             is StatusUiSiswa.Success -> DaftarSiswa(
                 itemsSiswa = statusUiSiswa.siswa,
-                onSiswaClick = { it.id.toInt() }
+                onSiswaClick = { onSiswaClick(it.id.toInt()) }
             )
             is StatusUiSiswa.Error -> ErrorScreen(
                 retryAction = retryAction,
@@ -144,7 +144,7 @@ fun DaftarSiswa(
     onSiswaClick: (Siswa) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(modifier = Modifier) {
+    LazyColumn(modifier = modifier) {
         items(items = itemsSiswa, key = { it.id }) { person ->
             ItemSiswa(
                 siswa = person,
