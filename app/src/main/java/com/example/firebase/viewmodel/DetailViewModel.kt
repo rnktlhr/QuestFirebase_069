@@ -13,17 +13,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.firebase.repositori.RepositorySiswa
 import com.example.firebase.view.route.DestinasiDetail
 
-@file:OptIn(InternalSerializationApi::class)
-
-
 sealed interface StatusUIDetail {
-    data class Success(val satusisswa: Siswa?) : StatusUIDetail
+    data class Success(val satusiswa: Siswa?) : StatusUIDetail
     object Error : StatusUIDetail
     object Loading : StatusUIDetail
 }
 
-class DetailViewModel(savedStateHandle: SavedStateHandle, private val repositorySiswa:
-RepositorySiswa
+class DetailViewModel(
+    savedStateHandle: SavedStateHandle,
+    private val repositorySiswa: RepositorySiswa
 ) : ViewModel() {
 
     private val idSiswa: Long =
@@ -41,7 +39,9 @@ RepositorySiswa
         viewModelScope.launch {
             statusUIDetail = StatusUIDetail.Loading
             statusUIDetail = try {
-                StatusUIDetail.Success(satusisswa = repositorySiswa.getSatuSiswa(idSiswa))
+                StatusUIDetail.Success(
+                    satusiswa = repositorySiswa.getSatuSiswa(idSiswa)
+                )
             } catch (e: IOException) {
                 StatusUIDetail.Error
             } catch (e: Exception) {
